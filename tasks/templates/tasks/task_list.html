@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if object_list %}
+{% for task in object_list %}
+    <div class="task-entry">
+        <h1><a href=""></a>Task: {{ task.title }}</h1>
+    </div>
+{% endfor %}
+{% else %}
+<h1>There are no tasks</h1>
+{% endif %}
+
+{% endblock %}
