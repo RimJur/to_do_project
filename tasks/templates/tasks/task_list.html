@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+    <a href="{% url 'create' %}">Create a Task</a>
 {% if object_list %}
 {% for task in object_list %}
     <div class="task-entry">
-        <h1><a href=""></a>Task: {{ task.title }}</h1>
+        <h1><a href="{% url 'task' task.pk %}">Task: {{ task.title }}</a></h1>
+        <p><a href="{% url 'edit' task.pk %}">Edit</a> &#10072; <a href="{% url 'delete' task.pk %}">Delete</a></p>
     </div>
 {% endfor %}
 {% else %}

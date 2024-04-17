@@ -3,9 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To Do List</title>
+    <title>{% block title %}To Do List{% endblock %}</title>
 </head>
 <body>
+    <header>
+        <a href="{% url 'tasks' %}">Home</a> &#10072; <a href="{% url 'login' %}  ">Log In</a>
+        {% if user.is_authenticated %}
+        <p>Hi, {{ user.username }}!
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Log Out</button>
+        </form>
+        </p>
+        {% else %}
+        <p>You are browsing as a guest! Do now yet have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
+        {% endif %}
+    </header>
     {% block content %}
     {% endblock %}
 </body>
