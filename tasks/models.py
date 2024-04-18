@@ -7,7 +7,7 @@ class Task(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
-    completed = models.BooleanField()
+    completed = models.BooleanField(default=False)
     created = models.DateField(auto_now_add=True)
 
     def __str__(self):
@@ -15,3 +15,6 @@ class Task(models.Model):
 
     def get_absolute_url(self):
         return reverse('task', args=[str(self.id)])
+    
+    class Meta:
+        ordering = ['completed']
