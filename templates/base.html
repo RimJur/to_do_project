@@ -7,15 +7,16 @@
 </head>
 <body>
     <header>
-        <a href="{% url 'tasks' %}">Home</a> &#10072; <a href="{% url 'login' %}  ">Log In</a>
         {% if user.is_authenticated %}
         <p>Hi, {{ user.username }}!
-        <form action="{% url 'logout' %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Log Out</button>
-        </form>
+        <a href="{% url 'tasks' %}">Home</a>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Log Out</button>
+            </form>
         </p>
         {% else %}
+        <a href="{% url 'tasks' %}">Home</a> &#10072; <a href="{% url 'login' %}  ">Log In</a>
         <p>You are browsing as a guest! Do now yet have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
         {% endif %}
     </header>

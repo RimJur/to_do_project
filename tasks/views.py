@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 class TaskListView(ListView):
     model = Task
+    context_object_name = 'tasks'
     
     def get_queryset(self):
         if not self.request.user.is_authenticated:
@@ -26,6 +27,7 @@ class TaskListView(ListView):
 
 class TaskDetailView(DetailView):
     model = Task
+    context_object_name = 'task'
     template_name = 'tasks/task.html'
 
 class TaskCreateView(LoginRequiredMixin, CreateView):

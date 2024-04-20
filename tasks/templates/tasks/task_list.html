@@ -9,14 +9,12 @@
             <form action="" method="get">
                 {% csrf_token %}
                 <input type="search" name="search" value="{{ request.GET.search|default:'' }}">
-                <input class="button" type="submit" value="Search"></input>
+                <input class="button" type="submit" value="Search">
             </form>
-        {% for task in object_list %}
+        {% for task in tasks %}
             <div class="task-entry">
                 {% if task.completed %}
-                <s>
-                    <h4><a href="{% url 'task' task.pk %}">Task: {{ task.title }}</a></h4>
-                </s>
+                <s><h4><a href="{% url 'task' task.pk %}">Task: {{ task.title }}</a></h4></s>
                 {% else %}
                 <h3><a href="{% url 'task' task.pk %}">Task: {{ task.title }}</a></h3>
                 {% endif %}

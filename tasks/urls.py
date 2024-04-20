@@ -5,7 +5,7 @@ from .views import (
     TaskDetailView,
     TaskCreateView,
     TaskEditView,
-    TaskDeleteView
+    TaskDeleteView,
 )
 
 urlpatterns = [

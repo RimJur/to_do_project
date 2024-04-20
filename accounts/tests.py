@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your tests here.
 
@@ -9,7 +10,7 @@ class SignupPageTests(TestCase):
     email = 'newuser@email.com'
 
     def test_signup_page_status_code(self):
-        response = self.client.get('/accounts/signup/')
+        response = self.client.get(reverse('signup'))
         self.assertEqual(response.status_code, 200)
 
     def test_view_url_by_name(self):
@@ -27,3 +28,21 @@ class SignupPageTests(TestCase):
         self.assertEqual(get_user_model().objects.all()
                         [0].email, self.email)
         
+
+class LoggedInUserAccesDenied(TestCase):
+    def setUp(self):
+        self.user = get_user_model().objects.create_user(
+            username = 'testuser',
+            email = 'test@gmail.com',
+            password = 'secret'
+        )
+
+    def test_access_login_page(self):
+        self.client.login(username='testuser', password='secret')
+        response = self.client.get(reverse('login'))
+        self.assertEqual(response.status_code, 302)
+
+    def test_access_signup_page(self):
+        self.client.login(username='testuser', password='secret')
+        response = self.client.get(reverse('signup'))
+        self.assertEqual(response.status_code, 302)

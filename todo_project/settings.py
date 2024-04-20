@@ -127,3 +127,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'tasks'
 LOGOUT_REDIRECT_URL = 'tasks'
+LOGIN_URL = 'login'
